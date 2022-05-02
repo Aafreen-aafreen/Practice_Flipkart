@@ -3,18 +3,19 @@ package com.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
+public class LoginPage extends Base {
 
 	private WebDriver driver;
 
 	// 1. By Locators: OR
-	private By emailId = By.id("email");
-	private By password = By.id("passwd");
-	private By signInButton = By.id("SubmitLogin");
-	private By forgotPwdLink = By.linkText("Forgot your password?111");
+	public By emailId = By.xpath("//*[text()='Enter Email/Mobile number']/parent::label/preceding-sibling::input");
+	public By password = By.xpath("//*[@type='password']");
+	public By signInButton = By.xpath("(//*[@type='submit'])[2]");
+	public By loggenin_user = By.xpath("//*[@class='exehdJ' and text()='Test']");
 
 	// 2. Constructor of the page class:
 	public LoginPage(WebDriver driver) {
+		super(driver);
 		this.driver = driver;
 	}
 
@@ -24,9 +25,7 @@ public class LoginPage {
 		return driver.getTitle();
 	}
 
-	public boolean isForgotPwdLinkExist() {
-		return driver.findElement(forgotPwdLink).isDisplayed();
-	}
+
 
 	public void enterUserName(String username) {
 		driver.findElement(emailId).sendKeys(username);
@@ -40,12 +39,12 @@ public class LoginPage {
 		driver.findElement(signInButton).click();
 	}
 
-	public AccountsPage doLogin(String un, String pwd) {
+	public void doLogin(String un, String pwd) {
 		System.out.println("login with: " + un + " and " + pwd);
 		driver.findElement(emailId).sendKeys(un);
 		driver.findElement(password).sendKeys(pwd);
 		driver.findElement(signInButton).click();
-		return new AccountsPage(driver);
+
 	}
 
 }

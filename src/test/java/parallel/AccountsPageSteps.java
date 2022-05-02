@@ -27,7 +27,7 @@ public class AccountsPageSteps {
 
 		DriverFactory.getDriver()
 				.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
-		accountsPage = loginPage.doLogin(userName, password);
+
 
 	}
 

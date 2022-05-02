@@ -18,7 +18,7 @@ public class LoginPageSteps {
 	public void user_is_on_login_page() {
 
 		DriverFactory.getDriver()
-				.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+				.get("https://www.flipkart.com/");
 	}
 
 	@When("user gets the title of the page")
@@ -32,10 +32,7 @@ public class LoginPageSteps {
 		Assert.assertTrue(title.contains(expectedTitleName));
 	}
 
-	@Then("forgot your password link should be displayed")
-	public void forgot_your_password_link_should_be_displayed() {
-		Assert.assertTrue(loginPage.isForgotPwdLinkExist());
-	}
+
 
 	@When("user enters username {string}")
 	public void user_enters_username(String username) {
@@ -48,9 +45,26 @@ public class LoginPageSteps {
 	}
 
 	@When("user clicks on Login button")
-	public void user_clicks_on_login_button() {
+	public void user_clicks_on_login_button() throws InterruptedException {
 		loginPage.clickOnLogin();
+		Thread.sleep(5000);
 	}
 
 
+	@Given("user enters username")
+	public void userEntersUsername() {
+		loginPage.enterUserName("alfotech512@gmail.com");
+	}
+
+	@Given("user enters password")
+	public void userEntersPassword() throws InterruptedException {
+		loginPage.enterPassword("Test123!");
+		//loginPage.doLogin("alfotech512@gmail.com","Test123!");
+		//Thread.sleep(3000);loggenin_user
+	}
+
+	@Then("validate the logged in user")
+	public void validateTheLoggedInUser() {
+		loginPage.is_displayed(loginPage.loggenin_user);
+	}
 }
