@@ -56,4 +56,5 @@ public class AccountsPageSteps {
 		Assert.assertTrue(accountsPage.getAccountsSectionCount() == expectedSectionCount);
 	}
 
+
 }

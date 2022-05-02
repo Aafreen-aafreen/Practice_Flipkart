@@ -76,9 +76,9 @@ public class Base {
 
             assert s1.equalsIgnoreCase(s2);
         }
-        public void Mouse_hover(String locator)
+        public void Mouse_hover(By locator)
       {
-          WebElement ele = driver1.findElement(By.xpath(locator));
+          WebElement ele = driver1.findElement(locator);
           Actions actions = new Actions(driver1);
           actions.moveToElement(ele).perform();
        }
