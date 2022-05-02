@@ -1,4 +1,4 @@
-Feature: Grocery page feature
+Feature: Address page feature
 
   Background: Validation of successfull login
     Given user is on login page
