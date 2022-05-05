@@ -14,3 +14,12 @@ Scenario: Validation of successfull login
   Then validate the logged in user
 
 
+Scenario: Validate the size of image in home page
+  Given user is on login page
+  Given user enters username
+  Given user enters password
+  Given user clicks on Login button
+  Then Verify the image size
+
+
+

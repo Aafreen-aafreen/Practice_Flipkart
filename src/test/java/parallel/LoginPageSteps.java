@@ -8,6 +8,8 @@ import com.qa.factory.DriverFactory;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class LoginPageSteps {
 
@@ -66,5 +68,53 @@ public class LoginPageSteps {
 	@Then("validate the logged in user")
 	public void validateTheLoggedInUser() {
 		loginPage.is_displayed(loginPage.loggenin_user);
+	}
+
+    @Then("Verify the image size")
+    public void verifyTheImageSize() throws InterruptedException {
+		loginPage.validate_img();
+    }
+
+    @Given("i enter the product name on search bar")
+    public void iEnterTheProductNameOnSearchBar() throws InterruptedException {
+		loginPage.click_action(By.xpath("//*[@title='Search for products, brands and more']"));
+		loginPage.sendKeys_action(By.xpath("//*[@title='Search for products, brands and more']"),"Barbiedoll");
+		loginPage.click_action(By.xpath("//*[@type='submit']"));
+		Thread.sleep(3000);
+
+    }
+
+	@Then("i set max price filter")
+	public void iSetMaxPriceFilter() throws InterruptedException {
+
+		WebElement ele = DriverFactory.getDriver().findElement(By.xpath("//option[text()='₹5000+']/parent::select"));
+		loginPage.selectBydropdown(ele,"₹3000");
+		Thread.sleep(3000);
+
+
+	}
+
+	@Then("i set the min price filter")
+	public void iSetTheMinPriceFilter() {
+		WebElement ele = DriverFactory.getDriver().findElement(By.xpath("//option[text()='Min']/parent::select"));
+		loginPage.selectBydropdown(ele,"₹500");
+	}
+
+	@Given("i add product to wishlist")
+	public void iAddProductToWishlist() throws InterruptedException {
+		loginPage.click_action(By.xpath("(//*[@class='eX72wL'])[1]"));
+		Thread.sleep(1000);
+		loginPage.Switch_window();
+		DriverFactory.getDriver().get("https://www.flipkart.com/wishlist?link=home_wishlist");
+		Thread.sleep(5000);
+		//loginPage.is_displayed(By.xpath("//*[text()='BARBIE Ken Fashionistas Doll 2']"));
+	}
+
+	@Then("i buy the product")
+	public void iBuyTheProduct() throws InterruptedException {
+		loginPage.Switch_window();
+		loginPage.click_action(By.xpath("//*[text()='BARBIE Ken Fashionistas Doll 2']"));
+		Thread.sleep(7000);
+
 	}
 }

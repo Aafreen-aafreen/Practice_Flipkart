@@ -39,6 +39,10 @@ public class GroceryPageSteps {
     @Given("i add dal to my cart")
     public void iAddDalToMyCart() throws InterruptedException {
         groceryPage.Switch_window();
+        Thread.sleep(3000);
+        groceryPage.click_action(groceryPage.Add_to_basket);
+        groceryPage.scroll_operation("150");
+        Thread.sleep(1000);
         groceryPage.click_action(groceryPage.Go_to_basket);
         boolean b =groceryPage.is_displayed(groceryPage.Add_Toor_Daal);
         assert b;
